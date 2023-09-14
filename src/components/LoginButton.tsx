@@ -1,0 +1,31 @@
+"use client";
+import { useSession, signIn, signOut, getSession } from "next-auth/react";
+
+export const LoginButton = () => {
+  const { data: session } = useSession();
+
+  console.log({session: useSession()})
+
+
+  if (session) {
+    return (
+      <>
+        Signed in as {session?.user?.email} <br />
+        <button onClick={() => signOut()}>Sign out</button>
+      </>
+    );
+  }
+  return (
+    <>
+      Not signed in <br />
+      <button
+        onClick={() => {
+          console.log("logging in?");
+           signIn();
+        }}
+      >
+        Sign in
+      </button>
+    </>
+  );
+};
